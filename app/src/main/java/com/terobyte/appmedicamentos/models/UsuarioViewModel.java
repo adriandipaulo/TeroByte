@@ -17,14 +17,23 @@ public class UsuarioViewModel extends AndroidViewModel {
 
     public UsuarioViewModel(Application application) {
         super(application);
-        usuarioRepository= new UsuarioRepository(application);
-        usuarios= usuarioRepository.VerUsuarios();
+        usuarioRepository = new UsuarioRepository(application);
+        usuarios = usuarioRepository.VerUsuarios();
     }
 
-    public LiveData<List<Usuarios>> verUsuarios(){
+    public LiveData<List<Usuarios>> verUsuarios() {
         return usuarios;
     }
-    public void insert (Usuarios usuario){
+
+    public void insert(Usuarios usuario) {
         usuarioRepository.agregarUsuario(usuario);
+    }
+
+    public void delete(Usuarios usuario){
+        usuarioRepository.eliminarUsuario(usuario);
+    }
+
+    public void update(Usuarios usuario){
+        usuarioRepository.editarUsuario(usuario);
     }
 }

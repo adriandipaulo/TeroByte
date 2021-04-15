@@ -29,4 +29,15 @@ public class UsuarioRepository {
             iUsuariosDao.AgregarUsuario(usuario);
         });
     }
+
+    public void eliminarUsuario(Usuarios usuario){
+        AppDataBase.databaseWriteExecutor.execute(() ->{
+            iUsuariosDao.EliminarUsuario(usuario);
+        });
+    }
+    public void editarUsuario(Usuarios usuario){
+        AppDataBase.databaseWriteExecutor.execute(() ->{
+            iUsuariosDao.EditUsuario(usuario);
+        });
+    }
 }
