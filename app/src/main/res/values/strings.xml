@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">AppMedicamentos</string>
+    <string name="app_subtitle">Tero</string>
+    <string name="home">Volver</string>
+    <string name="med">Medicamentos</string>
+    <string name="usu">Usuarios</string>
+    <string name="navigation_drawer_open">Ver</string>
+    <string name="navigation_drawer_close">Cerrar</string>
+    <string name="des">Tecnología Especializada en Remedios y Orden</string>
+    <string name="Logo">T E R O</string>
 </resources>
