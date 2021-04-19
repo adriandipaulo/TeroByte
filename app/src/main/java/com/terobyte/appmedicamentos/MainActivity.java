@@ -30,20 +30,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public static final int UPDATE_CODE_MEDICAMETO = 2;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        RecyclerView recyclerView= findViewById(R.id.recyclerViewMed);
-        final MedicamentoAdapter adapter= new MedicamentoAdapter(new MedicamentoAdapter.medicamentoDiff());
+        RecyclerView recyclerView = findViewById(R.id.recyclerViewMed);
+        final MedicamentoAdapter adapter = new MedicamentoAdapter(new MedicamentoAdapter.medicamentoDiff());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        medicamentosViewModel = new ViewModelProvider(this,new MedicamentoFactory(getApplication())).get(MedicamentosViewModel.class);
-        medicamentosViewModel.verMedicamentos().observe(this,Medicamentos ->{adapter.submitList(Medicamentos);});
+        medicamentosViewModel = new ViewModelProvider(this, new MedicamentoFactory(getApplication())).get(MedicamentosViewModel.class);
+        medicamentosViewModel.verMedicamentos().observe(this, Medicamentos -> {
+            adapter.submitList(Medicamentos);
+        });
 
-        FloatingActionButton fab= findViewById(R.id.AgregarBotonFloat);
+        FloatingActionButton fab = findViewById(R.id.AgregarBotonFloat);
 
         adapter.setMeicamentoListener(new MedicamentoAdapter.OnItemClickListener() {
             @Override
@@ -53,17 +54,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             @Override
             public void onEditMedicamento(Medicamentos medicamento) {
-                Intent intent= new Intent(MainActivity.this,EditMedicamento.class);
-                intent.putExtra(EditMedicamento.EXTRA_ID,medicamento.getId_medicamento());
-                intent.putExtra(EditMedicamento.EXTRA_NOM,medicamento.getNombreMedicamento());
-                intent.putExtra(EditMedicamento.EXTRA_HOR,medicamento.getTomar_cada());
-                intent.putExtra(EditMedicamento.EXTRA_DOS,medicamento.getPresentacion());
-                intent.putExtra(EditMedicamento.EXTRA_USU,medicamento.getUsuario());
+                Intent intent = new Intent(MainActivity.this, EditMedicamento.class);
+                intent.putExtra(EditMedicamento.EXTRA_ID, medicamento.getId_medicamento());
+                intent.putExtra(EditMedicamento.EXTRA_NOM, medicamento.getNombreMedicamento());
+                intent.putExtra(EditMedicamento.EXTRA_HOR, medicamento.getTomar_cada());
+                intent.putExtra(EditMedicamento.EXTRA_DOS, medicamento.getPresentacion());
+                intent.putExtra(EditMedicamento.EXTRA_USU, medicamento.getUsuario());
                 startActivityForResult(intent, UPDATE_CODE_MEDICAMETO);
             }
         });
 
-        fab.setOnClickListener(view ->{
+        fab.setOnClickListener(view -> {
             Intent intent = new Intent(MainActivity.this, EditMedicamento.class);
             startActivityForResult(intent, CODE_MEDICAMETO);
         });
@@ -71,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setSupportActionBar(toolbar);
         getSupportActionBar().setSubtitle(R.string.app_subtitle);
 
-        DrawerLayout drawerLayout =  findViewById(R.id.drawer_layout);
+        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
@@ -79,44 +80,46 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
+
     @Override
-    public boolean onCreateOptionsMenu(Menu menu){
+    public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.main_activity_menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
-    public void onActivityResult(int requestCode, int resultCode, Intent data){
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode== CODE_MEDICAMETO && resultCode == RESULT_OK){
-            Medicamentos xm= new Medicamentos();
+        if (requestCode == CODE_MEDICAMETO && resultCode == RESULT_OK) {
+            Medicamentos xm = new Medicamentos();
             xm.setNombreMedicamento(data.getStringExtra(EditMedicamento.EXTRA_NOM));
             xm.setPresentacion(data.getStringExtra(EditMedicamento.EXTRA_DOS));
-            xm.setTomar_cada(data.getDoubleExtra(EditMedicamento.EXTRA_HOR,0.0));
+            xm.setTomar_cada(data.getDoubleExtra(EditMedicamento.EXTRA_HOR, 0.0));
             xm.setUsuario(data.getStringExtra(EditMedicamento.EXTRA_USU));
             medicamentosViewModel.insert(xm);
 
-        } else if (requestCode== UPDATE_CODE_MEDICAMETO && resultCode==RESULT_OK){
-            int id= data.getIntExtra(EditMedicamento.EXTRA_ID,-1);
-            if (id ==-1){
-                Toast.makeText(getApplicationContext(),"Error al Editar",Toast.LENGTH_SHORT).show();
+        } else if (requestCode == UPDATE_CODE_MEDICAMETO && resultCode == RESULT_OK) {
+            int id = data.getIntExtra(EditMedicamento.EXTRA_ID, -1);
+            if (id == -1) {
+                Toast.makeText(getApplicationContext(), "Error al Editar", Toast.LENGTH_SHORT).show();
             }
-            Medicamentos xm= new Medicamentos();
+            Medicamentos xm = new Medicamentos();
             xm.setNombreMedicamento(data.getStringExtra(EditMedicamento.EXTRA_NOM));
             xm.setPresentacion(data.getStringExtra(EditMedicamento.EXTRA_DOS));
-            xm.setTomar_cada(data.getDoubleExtra(EditMedicamento.EXTRA_HOR,0.0));
+            xm.setTomar_cada(data.getDoubleExtra(EditMedicamento.EXTRA_HOR, 0.0));
             xm.setUsuario(data.getStringExtra(EditMedicamento.EXTRA_USU));
             xm.setId_medicamento(id);
             medicamentosViewModel.update(xm);
 
-        }else {
+        } else {
             Toast.makeText(getApplicationContext(), "Medicamento no guardado", Toast.LENGTH_LONG).show();
         }
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.usuarios:
                 Intent i = new Intent(MainActivity.this, UsuariosActivity.class);
                 startActivity(i);
@@ -130,4 +133,4 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         return true;
     }
-}//fin activity
+}
