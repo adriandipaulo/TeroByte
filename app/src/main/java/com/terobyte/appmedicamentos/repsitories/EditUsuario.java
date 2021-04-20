@@ -8,11 +8,11 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.terobyte.appmedicamentos.models.MedicamentosViewModel;
 
-public class MedicamentoFactory  extends ViewModelProvider.NewInstanceFactory{
+public class EditUsuario  extends ViewModelProvider.NewInstanceFactory{
     @NonNull
     private final Application application;
 
-    public MedicamentoFactory(@NonNull Application application) {
+    public EditUsuario(@NonNull Application application) {
         this.application = application;
     }
     @NonNull
