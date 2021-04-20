@@ -48,9 +48,13 @@ public class UsuariosActivity extends AppCompatActivity implements NavigationVie
 
             @Override
             public void onEditUsuario(Usuarios usuarios) {
-                //Intent intent= new Intent(UsuariosActivity.this,EditUsuarios.class);
-                //intent.putExtra(EditUsuarios.EXTRA_ID,usuarios.getId());
-                //intent.putExtra(EditUsuarios.EXTRA_NOMAPELL,usuarios.getNombreApellido());
+                Intent intent= new Intent(UsuariosActivity.this,EditUsuarios.class);
+                intent.putExtra(EditUsuarios.EXTRA_IDU,usuarios.getId());
+                intent.putExtra(EditUsuarios.EXTRA_NOMAP,usuarios.getNombreApellido());
+                intent.putExtra(EditUsuarios.EXTRA_PESO,usuarios.getPeso());
+                intent.putExtra(EditUsuarios.EXTRA_ALTURA,usuarios.getAltura());
+                intent.putExtra(EditUsuarios.EXTRA_PRESION,usuarios.getPresion());
+                startActivityForResult(intent,UPDATE_CODE_USUARIOS);
 
             }
         });

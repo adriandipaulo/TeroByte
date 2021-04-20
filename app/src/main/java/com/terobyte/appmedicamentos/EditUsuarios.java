@@ -54,6 +54,15 @@ public class EditUsuarios extends AppCompatActivity {
             }
             finish();
         });
+        Intent intent= getIntent();
+        if (intent.hasExtra(EXTRA_IDU)){
+            Double ehoEdit=intent.getDoubleExtra(EXTRA_ALTURA,0.0);
+            Integer pesoIn=intent.getIntExtra(EXTRA_PESO,0);
+            editNomAp.setText(intent.getStringExtra(EXTRA_NOMAP));
+            editPeso.setText(pesoIn.toString());
+            editAltura.setText(ehoEdit.toString());
+            editPresion.setText(intent.getStringExtra(EXTRA_PRESION));
+        }
 
     }
 }
