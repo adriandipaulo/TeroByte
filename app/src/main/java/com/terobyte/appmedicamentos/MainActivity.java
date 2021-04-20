@@ -29,8 +29,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public static final int CODE_MEDICAMETO = 1;
     public static final int UPDATE_CODE_MEDICAMETO = 2;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,6 +83,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         menuInflater.inflate(R.menu.main_activity_menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
+
     public void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
 
