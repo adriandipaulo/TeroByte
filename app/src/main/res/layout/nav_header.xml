@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/header"
-    android:rotationX="8">
+    android:background="@color/header">
 
     <TextView
         android:id="@+id/header_title"
@@ -13,7 +12,7 @@
         android:drawablePadding="12dp"
         android:gravity="center_vertical"
         android:text="@string/Logo"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium.Inverse"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
         android:visibility="visible"
         app:drawableStartCompat="@drawable/ic_baseline_bookmarks_24"
         app:layout_constraintTop_toTopOf="parent" />
@@ -23,12 +22,13 @@
         android:layout_height="match_parent"
         android:layout_marginStart="5dp"
         android:layout_marginLeft="5dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="30dp"
         android:fontFamily="sans-serif-black"
         android:text="@string/des"
         android:textAppearance="@style/TextAppearance.AppCompat.Small.Inverse"
-        app:layout_constraintBottom_toBottomOf="@id/header_title"
-        app:layout_constraintEnd_toEndOf="@id/header_title"
-        app:layout_constraintStart_toStartOf="@id/header_title"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.06999999" />
 </androidx.constraintlayout.widget.ConstraintLayout>
