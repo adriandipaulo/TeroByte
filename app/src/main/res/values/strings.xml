@@ -12,4 +12,6 @@
     <string name="ingrese_el_nombre">Ingrese el nombre</string>
     <string name="usuario">usuario</string>
     <string name="guardar">Guardar</string>
+    <string name="txtDes">Descripcion:</string>
+    <string name="txtGen">Medicamento X</string>
 </resources>
