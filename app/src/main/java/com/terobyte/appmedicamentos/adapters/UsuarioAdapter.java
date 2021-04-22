@@ -2,11 +2,9 @@ package com.terobyte.appmedicamentos.adapters;
 
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
-
 import com.terobyte.appmedicamentos.R;
 import com.terobyte.appmedicamentos.entidades.Medicamentos;
 import com.terobyte.appmedicamentos.entidades.Usuarios;
@@ -49,12 +47,14 @@ public class UsuarioAdapter extends ListAdapter<Usuarios,UsuarioViewHolder> {
     public static class usuarioDiff extends DiffUtil.ItemCallback<Usuarios>{
         @Override
         public boolean areItemsTheSame(@NonNull Usuarios oldItem, @NonNull Usuarios newItem) {
-            return false;
+            return oldItem.getId()== newItem.getId() && oldItem.getPeso() == newItem.getPeso() &&
+                    oldItem.getAltura()==newItem.getAltura();
         }
 
         @Override
         public boolean areContentsTheSame(@NonNull Usuarios oldItem, @NonNull Usuarios newItem) {
-            return false;
+            return oldItem.getNombreApellido().equals(newItem.getNombreApellido()) &&
+                    oldItem.getPresion().equals(newItem.getPresion());
         }
     }
     public interface OnItemClickListener{

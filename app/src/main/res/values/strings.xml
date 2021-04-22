@@ -8,4 +8,8 @@
     <string name="navigation_drawer_close">Cerrar</string>
     <string name="des">Tecnología Especializada en Remedios y Orden</string>
     <string name="Logo">T E R O</string>
+    <string name="todo">TODO</string>
+    <string name="ingrese_el_nombre">Ingrese el nombre</string>
+    <string name="usuario">usuario</string>
+    <string name="guardar">Guardar</string>
 </resources>

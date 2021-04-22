@@ -28,7 +28,7 @@ public class EditMedicamento extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_medicamento);
-        editNombre=findViewById(R.id.editNomMedic);
+        editNombre=findViewById(R.id.editusuario4);
         editHora=findViewById(R.id.editHora);
         editDosis=findViewById(R.id.editDosis);
         editUsuario=findViewById(R.id.editUsuario);

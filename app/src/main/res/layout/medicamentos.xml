@@ -32,8 +32,8 @@
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="108dp"
-                android:layout_marginLeft="108dp"
+                android:layout_marginStart="54dp"
+                android:layout_marginLeft="54dp"
                 android:text="Descripcion:"
                 app:layout_constraintBaseline_toBaselineOf="@+id/nombreMedicamento"
                 app:layout_constraintStart_toStartOf="parent" />
@@ -61,8 +61,8 @@
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="108dp"
-                android:layout_marginLeft="108dp"
+                android:layout_marginStart="54dp"
+                android:layout_marginLeft="54dp"
                 android:text="Tomar Cada"
                 app:layout_constraintBaseline_toBaselineOf="@+id/tomarCada"
                 app:layout_constraintStart_toStartOf="parent" />
@@ -97,7 +97,7 @@
                 android:textSize="18sp"
                 app:layout_constraintBottom_toTopOf="@+id/usuario"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.184"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/textView3"
                 app:layout_constraintTop_toBottomOf="@+id/tomarCada" />
 
@@ -113,7 +113,7 @@
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.153"
+                app:layout_constraintHorizontal_bias="0.085"
                 app:layout_constraintStart_toEndOf="@+id/textView4"
                 app:layout_constraintTop_toBottomOf="@+id/dosisATomar" />
 
@@ -149,8 +149,8 @@
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="108dp"
-                android:layout_marginLeft="108dp"
+                android:layout_marginStart="90dp"
+                android:layout_marginLeft="90dp"
                 android:text="Tomar"
                 app:layout_constraintBaseline_toBaselineOf="@+id/dosisATomar"
                 app:layout_constraintStart_toStartOf="parent" />
@@ -159,8 +159,8 @@
                 android:id="@+id/textView4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="108dp"
-                android:layout_marginLeft="108dp"
+                android:layout_marginStart="80dp"
+                android:layout_marginLeft="80dp"
                 android:text="Usuario"
                 app:layout_constraintBaseline_toBaselineOf="@+id/usuario"
                 app:layout_constraintStart_toStartOf="parent" />

@@ -8,8 +8,8 @@
 
     <EditText
         android:id="@+id/editHora"
-        android:layout_width="80dp"
-        android:layout_height="83dp"
+        android:layout_width="203dp"
+        android:layout_height="67dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="16dp"
@@ -17,15 +17,15 @@
         android:hint='"Tomar Cada"'
         android:inputType="number"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editNomMedic" />
+        app:layout_constraintTop_toBottomOf="@+id/editusuario4" />
 
     <EditText
-        android:id="@+id/editNomMedic"
+        android:id="@+id/editusuario4"
         android:layout_width="0dp"
         android:layout_height="83dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:ems="10"
@@ -41,7 +41,7 @@
         android:layout_height="83dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:ems="10"
@@ -57,7 +57,7 @@
         android:layout_height="83dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:ems="10"
@@ -70,23 +70,25 @@
     <Button
         android:id="@+id/BtnGuardar"
         android:layout_width="274dp"
-        android:layout_height="89dp"
-        android:layout_marginBottom="32dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="8dp"
         android:text="Guardar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editUsuario"
-        app:layout_constraintVertical_bias="0.906" />
+        app:layout_constraintVertical_bias="0.39" />
 
     <RadioGroup
+        android:id="@+id/radioGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@+id/editDosis"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/editHora"
-        app:layout_constraintTop_toBottomOf="@+id/editNomMedic">
+        app:layout_constraintTop_toBottomOf="@+id/editusuario4">
 
         <RadioButton
             android:id="@+id/radioHoras"
