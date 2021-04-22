@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 intent.putExtra(EditMedicamento.EXTRA_HOR,medicamento.getTomar_cada());
                 intent.putExtra(EditMedicamento.EXTRA_DOS,medicamento.getPresentacion());
                 intent.putExtra(EditMedicamento.EXTRA_USU,medicamento.getUsuario());
+                intent.putExtra(EditMedicamento.EXTRA_FORMATOHORA,"1");
                 startActivityForResult(intent, UPDATE_CODE_MEDICAMETO);
             }
         });

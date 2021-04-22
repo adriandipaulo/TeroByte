@@ -5,9 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.Toast;
 
 public class EditMedicamento extends AppCompatActivity {
     public static final String EXTRA_ID = "com.terobyte.appmedicamentos.id";
@@ -15,6 +17,7 @@ public class EditMedicamento extends AppCompatActivity {
     public static final String EXTRA_HOR = "com.terobyte.appmedicamentos.hora";
     public static final String EXTRA_DOS = "com.terobyte.appmedicamentos.dosis";
     public static final String EXTRA_USU = "com.terobyte.appmedicamentos.usuario";
+    public static final String EXTRA_FORMATOHORA = "com.terobyte.appmedicamentos.formatohora";
 
     private EditText editNombre;
     private EditText editHora;
@@ -22,7 +25,7 @@ public class EditMedicamento extends AppCompatActivity {
     private EditText editUsuario;
     private RadioButton radioHora;
     private RadioButton radioMinuto;
-
+    private String FH="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +36,8 @@ public class EditMedicamento extends AppCompatActivity {
         editDosis=findViewById(R.id.editDosis);
         editUsuario=findViewById(R.id.editUsuario);
         radioMinuto=findViewById(R.id.radioMin);
-        radioMinuto.setChecked(true);
-        
+        radioHora=findViewById(R.id.radioHoras);
+
         final Button button = findViewById(R.id.BtnGuardar);
         button.setOnClickListener(view -> {
             Intent replyIntent = new Intent();
@@ -45,6 +48,13 @@ public class EditMedicamento extends AppCompatActivity {
                 String eho1 = editHora.getText().toString();
                 String edo = editDosis.getText().toString();
                 String eus = editUsuario.getText().toString();
+                String fho="Horas";
+                if (radioMinuto.isChecked()==true){
+                    fho="Minutos";
+                    replyIntent.putExtra(EXTRA_FORMATOHORA,fho);
+                }else{
+                    replyIntent.putExtra(EXTRA_FORMATOHORA,fho);
+                }
                 Double eho= Double.parseDouble(eho1);
                 replyIntent.putExtra(EXTRA_NOM, enm);
                 replyIntent.putExtra(EXTRA_HOR, eho);
@@ -56,6 +66,7 @@ public class EditMedicamento extends AppCompatActivity {
                 }
                 setResult(RESULT_OK, replyIntent);
             }
+
             finish();
         });
 
@@ -66,6 +77,22 @@ public class EditMedicamento extends AppCompatActivity {
             editHora.setText(ehoEdit.toString());
             editDosis.setText(intent.getStringExtra(EXTRA_DOS));
             editUsuario.setText(intent.getStringExtra(EXTRA_USU));
+            FH=intent.getStringExtra(EXTRA_FORMATOHORA);
+            Toast.makeText(this,FH.toString(),Toast.LENGTH_LONG).show();
+            if(FH.equals("Horas")){
+                radioHora.setChecked(true);
+            }else{
+                radioMinuto.setChecked(true);
+            }
+            }
+
+        }
+        private void checkR(String dato){
+            if(dato == "1"){
+                radioHora.setChecked(true);
+            }else{
+                radioMinuto.setChecked(true);
+
         }
     }
 }
