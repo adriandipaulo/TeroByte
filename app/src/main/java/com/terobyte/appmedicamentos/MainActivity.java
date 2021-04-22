@@ -10,12 +10,20 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.Manifest;
+import android.content.ContentValues;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -25,9 +33,19 @@ import com.terobyte.appmedicamentos.entidades.Medicamentos;
 import com.terobyte.appmedicamentos.models.MedicamentosViewModel;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
     private MedicamentosViewModel medicamentosViewModel;
     public static final int CODE_MEDICAMETO = 1;
     public static final int UPDATE_CODE_MEDICAMETO = 2;
+
+    private static final int PERMISSION_CODE = 3;
+    private static final int IMAGE_CAPTURE_CODE = 4;
+
+    // botón para capturar fotografía del medicamento
+    Button mFotografiarBtn;
+    ImageView mImageView;
+
+    Uri foto_Uri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +56,30 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        //botón para capturar fotografía del medicamento
+        mImageView = findViewById(R.id.image_view_camara);
+        mFotografiarBtn = findViewById(R.id.btn_fotografiar);
+        //cuando se hace click en el botón
+        mFotografiarBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED ||
+                            checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
+                        //pedir que se habilite la cámara si no hay permisos
+                        String[] permisoscam = {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
+                        requestPermissions(permisoscam, PERMISSION_CODE);
+                    }
+                    else {
+                        //si los permisos ya estaban aceptados
+                        abrirCamara();
+                    }
+                }
+                else {
+                    abrirCamara();
+                }
+            }
+        });
 
         medicamentosViewModel = new ViewModelProvider(this,new MedicamentoFactory(getApplication())).get(MedicamentosViewModel.class);
         medicamentosViewModel.verMedicamentos().observe(this,Medicamentos ->{adapter.submitList(Medicamentos);});
@@ -79,6 +121,47 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = findViewById(R.id.navigation_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
+
+    //cómo funciona la cámara
+    private void abrirCamara() {
+        ContentValues values = new ContentValues();
+        values.put(MediaStore.Images.Media.TITLE, "Nueva fotografía");
+        values.put(MediaStore.Images.Media.DESCRIPTION, "Medicamento fotografiado");
+        foto_Uri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+        //intent de la cámara
+        Intent camaraIntent = new Intent (MediaStore.ACTION_IMAGE_CAPTURE);
+        camaraIntent.putExtra(MediaStore.EXTRA_OUTPUT, foto_Uri);
+        startActivityForResult(camaraIntent, IMAGE_CAPTURE_CODE);
+
+    }
+
+    //permisos de la cámara cuando el user los acepta o no
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode){
+            case PERMISSION_CODE: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    //acá el user autorizó el permiso
+                    abrirCamara();
+                }
+                else {
+                    //acá el user dijo que no
+                    Toast.makeText(
+                            this, "No se autorizó el uso de la cámara.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);    //????????????????????????????????????
+        if (resultCode == RESULT_OK) {
+            mImageView.setImageURI(foto_Uri);
+        }
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater menuInflater = getMenuInflater();
@@ -131,4 +214,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         return true;
     }
+
+
+
+
+
 }
