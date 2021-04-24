@@ -9,9 +9,10 @@ public class Medicamentos {
     @PrimaryKey(autoGenerate = true)
     private int id_medicamento;
     private String nombreMedicamento;
-    private double tomar_cada;
+    private int tomar_cada;
     private String presentacion;
     private String usuario;
+    private String horaMinuto;
 
     public void setId_medicamento(int id_medicamento) {
         this.id_medicamento = id_medicamento;
@@ -25,11 +26,11 @@ public class Medicamentos {
         this.nombreMedicamento = nombreMedicamento;
     }
 
-    public double getTomar_cada() {
+    public int getTomar_cada() {
         return tomar_cada;
     }
 
-    public void setTomar_cada(double tomar_cada) {
+    public void setTomar_cada(int tomar_cada) {
         this.tomar_cada = tomar_cada;
     }
 
@@ -51,5 +52,13 @@ public class Medicamentos {
 
     public int getId_medicamento() {
         return id_medicamento;
+    }
+
+    public String getHoraMinuto() {
+        return horaMinuto;
+    }
+
+    public void setHoraMinuto(String horaMinuto) {
+        this.horaMinuto = horaMinuto;
     }
 }

@@ -39,6 +39,16 @@
                 app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
+                android:id="@+id/horaMinuto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Horas"
+                android:textSize="18sp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/tomarCada"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tomarCada" />
+
+            <TextView
                 android:id="@+id/nombreMedicamento"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -121,9 +131,9 @@
                 android:id="@+id/editar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginBottom="25dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginBottom="16dp"
                 android:background="#ffffff"
                 android:src="@drawable/ic_baseline_edit_24"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -135,15 +145,15 @@
                 android:id="@+id/eliminar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
                 android:layout_marginBottom="16dp"
                 android:background="#FFFFFF"
                 android:src="@drawable/ic_baseline_cancel_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.894"
-                app:layout_constraintStart_toEndOf="@+id/usuario"/>
+                app:layout_constraintStart_toEndOf="@+id/usuario" />
 
             <TextView
                 android:id="@+id/textView3"

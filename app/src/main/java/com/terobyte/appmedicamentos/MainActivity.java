@@ -5,29 +5,43 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.appbar.MaterialToolbar;
 
+import androidx.core.app.NotificationManagerCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
+import android.app.AlarmManager;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.terobyte.appmedicamentos.adapters.MedicamentoAdapter;
+import com.terobyte.appmedicamentos.alarmManager.AlarmReceiver;
 import com.terobyte.appmedicamentos.entidades.Medicamentos;
 import com.terobyte.appmedicamentos.models.MedicamentosViewModel;
+
+import java.util.Calendar;
+
+import static android.app.PendingIntent.FLAG_CANCEL_CURRENT;
+import static android.app.PendingIntent.FLAG_UPDATE_CURRENT;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private MedicamentosViewModel medicamentosViewModel;
     public static final int CODE_MEDICAMETO = 1;
     public static final int UPDATE_CODE_MEDICAMETO = 2;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onItemDelete(Medicamentos medicamento) {
                 medicamentosViewModel.delete(medicamento);
-            }
+                }
 
             @Override
             public void onEditMedicamento(Medicamentos medicamento) {
@@ -58,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 intent.putExtra(EditMedicamento.EXTRA_HOR,medicamento.getTomar_cada());
                 intent.putExtra(EditMedicamento.EXTRA_DOS,medicamento.getPresentacion());
                 intent.putExtra(EditMedicamento.EXTRA_USU,medicamento.getUsuario());
-                intent.putExtra(EditMedicamento.EXTRA_FORMATOHORA,"1");
+                intent.putExtra(EditMedicamento.EXTRA_FORMATOHORA,medicamento.getHoraMinuto());
                 startActivityForResult(intent, UPDATE_CODE_MEDICAMETO);
             }
         });
@@ -93,9 +107,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Medicamentos xm= new Medicamentos();
             xm.setNombreMedicamento(data.getStringExtra(EditMedicamento.EXTRA_NOM));
             xm.setPresentacion(data.getStringExtra(EditMedicamento.EXTRA_DOS));
-            xm.setTomar_cada(data.getDoubleExtra(EditMedicamento.EXTRA_HOR,0.0));
+            xm.setTomar_cada(data.getIntExtra(EditMedicamento.EXTRA_HOR,0));
             xm.setUsuario(data.getStringExtra(EditMedicamento.EXTRA_USU));
+            xm.setHoraMinuto(data.getStringExtra(EditMedicamento.EXTRA_FORMATOHORA));
             medicamentosViewModel.insert(xm);
+            creaCanalNotificaciones();
+            createIntentMedicamento(xm);
 
         } else if (requestCode== UPDATE_CODE_MEDICAMETO && resultCode==RESULT_OK){
             int id= data.getIntExtra(EditMedicamento.EXTRA_ID,-1);
@@ -105,8 +122,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Medicamentos xm= new Medicamentos();
             xm.setNombreMedicamento(data.getStringExtra(EditMedicamento.EXTRA_NOM));
             xm.setPresentacion(data.getStringExtra(EditMedicamento.EXTRA_DOS));
-            xm.setTomar_cada(data.getDoubleExtra(EditMedicamento.EXTRA_HOR,0.0));
+            xm.setTomar_cada(data.getIntExtra(EditMedicamento.EXTRA_HOR,0));
             xm.setUsuario(data.getStringExtra(EditMedicamento.EXTRA_USU));
+            xm.setHoraMinuto(data.getStringExtra(EditMedicamento.EXTRA_FORMATOHORA));
             xm.setId_medicamento(id);
             medicamentosViewModel.update(xm);
 
@@ -131,4 +149,41 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         return true;
     }
+
+    @SuppressLint("ShortAlarm")
+    public void createIntentMedicamento(Medicamentos medicamentos){
+        int tiempo=medicamentos.getTomar_cada()*60*1000;
+        Intent i = new Intent(MainActivity.this, AlarmReceiver.class);
+        i.putExtra(AlarmReceiver.EXTRA_NOM,medicamentos.getNombreMedicamento());
+        i.putExtra(AlarmReceiver.EXTRA_DOS,medicamentos.getPresentacion());
+        i.putExtra(AlarmReceiver.EXTRA_USU,medicamentos.getUsuario());
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(MainActivity.this, medicamentos.getId_medicamento(),i, FLAG_UPDATE_CURRENT);
+        AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
+        am.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + tiempo,tiempo, pendingIntent);
+
+    }
+    public void creaCanalNotificaciones(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            NotificationChannel canal= new NotificationChannel("Canal001","APP Medicanmentos",NotificationManager.IMPORTANCE_HIGH);
+            canal.setDescription("Canal 001");
+
+            NotificationManager manager= getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(canal);
+        }
+
+    }
+
+
+    public void cancelaIntent(Medicamentos medicamentos){
+        int tiempo=medicamentos.getTomar_cada()*60*1000;
+        Intent i = new Intent(MainActivity.this, AlarmReceiver.class);
+        i.putExtra(AlarmReceiver.EXTRA_NOM,medicamentos.getNombreMedicamento());
+        i.putExtra(AlarmReceiver.EXTRA_DOS,medicamentos.getPresentacion());
+        i.putExtra(AlarmReceiver.EXTRA_USU,medicamentos.getUsuario());
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(MainActivity.this, medicamentos.getId_medicamento(),i,PendingIntent.FLAG_NO_CREATE);
+        AlarmManager am = (AlarmManager) getSystemService(ALARM_SERVICE);
+        am.cancel(pendingIntent);
+
+    }
+
 }

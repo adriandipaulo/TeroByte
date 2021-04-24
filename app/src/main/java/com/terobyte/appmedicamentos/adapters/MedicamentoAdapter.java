@@ -31,7 +31,7 @@ public class MedicamentoAdapter extends ListAdapter<Medicamentos,MedicamentosVie
         Medicamentos medicamentoActual= getItem(position);
         holder.Bind(medicamentoActual.getNombreMedicamento(),
                 medicamentoActual.getPresentacion(),
-                medicamentoActual.getUsuario(),medicamentoActual.getTomar_cada());
+                medicamentoActual.getUsuario(),medicamentoActual.getTomar_cada(),medicamentoActual.getHoraMinuto());
 
         ImageButton delteteButton= holder.itemView.findViewById(R.id.eliminar);
         delteteButton.setOnClickListener(view ->{
@@ -58,7 +58,8 @@ public class MedicamentoAdapter extends ListAdapter<Medicamentos,MedicamentosVie
         public boolean areContentsTheSame(@NonNull Medicamentos oldItem, @NonNull Medicamentos newItem) {
             return oldItem.getNombreMedicamento().equals(newItem.getNombreMedicamento()) &&
                     oldItem.getPresentacion().equals(newItem.getPresentacion()) &&
-                    oldItem.getUsuario().equals(newItem.getUsuario());
+                    oldItem.getUsuario().equals(newItem.getUsuario()) &&
+                    oldItem.getHoraMinuto().equals(newItem.getHoraMinuto());
         }
     }
 

@@ -55,7 +55,7 @@ public class EditMedicamento extends AppCompatActivity {
                 }else{
                     replyIntent.putExtra(EXTRA_FORMATOHORA,fho);
                 }
-                Double eho= Double.parseDouble(eho1);
+                Integer eho= Integer.parseInt(eho1);
                 replyIntent.putExtra(EXTRA_NOM, enm);
                 replyIntent.putExtra(EXTRA_HOR, eho);
                 replyIntent.putExtra(EXTRA_DOS, edo);
@@ -72,7 +72,7 @@ public class EditMedicamento extends AppCompatActivity {
 
         Intent intent= getIntent();
         if (intent.hasExtra(EXTRA_ID)){
-            Double ehoEdit=intent.getDoubleExtra(EXTRA_HOR,0.0);
+            Integer ehoEdit=intent.getIntExtra(EXTRA_HOR,0);
             editNombre.setText(intent.getStringExtra(EXTRA_NOM));
             editHora.setText(ehoEdit.toString());
             editDosis.setText(intent.getStringExtra(EXTRA_DOS));

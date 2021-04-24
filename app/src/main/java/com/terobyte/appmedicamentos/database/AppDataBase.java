@@ -17,7 +17,7 @@ import com.terobyte.appmedicamentos.entidades.Usuarios;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {Mi_cel.class, Usuarios.class, Medicamentos.class},version = 1)
+@Database(entities = {Mi_cel.class, Usuarios.class, Medicamentos.class},version = 3)
 public abstract class AppDataBase extends RoomDatabase {
     public abstract Mi_cel_dao mi_cel_dao();
     public abstract IUsuariosDao iUsuariosDao();
@@ -28,7 +28,8 @@ public abstract class AppDataBase extends RoomDatabase {
 
     public static AppDataBase getInstance(final Context context){
         if (instance == null){
-            instance = Room.databaseBuilder(context.getApplicationContext(),AppDataBase.class,"MedicamentosApp").build();
+            instance = Room.databaseBuilder(context.getApplicationContext(),AppDataBase.class,"MedicamentosApp")
+                    .fallbackToDestructiveMigration().build();
             }
         return  instance;
     }
