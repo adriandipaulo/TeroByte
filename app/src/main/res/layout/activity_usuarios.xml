@@ -20,7 +20,32 @@
             android:layout_width="match_parent"
             android:layout_height="54dp"
             app:layout_constraintStart_toStartOf="parent" />
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/emptyLayout"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="visible"
+            tools:visibility="visible">
 
+            <ImageView
+                android:id="@+id/empty_image"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/ic_baseline_add_chart_24" />
+
+            <TextView
+                android:id="@+id/emptyMessage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:alpha="0.3"
+                android:text="¡No hay usuarios aún!"
+                android:textColor="#000000"
+                android:textSize="24sp" />
+        </LinearLayout>
         <androidx.recyclerview.widget.RecyclerView
             android:background="@color/cardview_shadow_start_color"
             android:id="@+id/recyclerViewUsuarios"

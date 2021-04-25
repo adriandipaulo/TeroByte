@@ -1,5 +1,13 @@
 package com.terobyte.appmedicamentos;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,13 +23,6 @@ import com.terobyte.appmedicamentos.adapters.UsuarioAdapter;
 import com.terobyte.appmedicamentos.entidades.Usuarios;
 import com.terobyte.appmedicamentos.models.UsuarioViewModel;
 import com.terobyte.appmedicamentos.repsitories.UsuariosFactory;
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.widget.Toast;
 
 public class UsuariosActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private UsuarioViewModel usuarioViewModel;
@@ -103,6 +104,7 @@ public class UsuariosActivity extends AppCompatActivity implements NavigationVie
         super.onActivityResult(requestCode,resultCode,data);
 
         if(requestCode== CODE_USUARIOS && resultCode == RESULT_OK){
+            findViewById(R.id.emptyLayout).setVisibility(View.GONE);
             Usuarios nuser= new Usuarios();
             nuser.setNombreApellido(data.getStringExtra(EditUsuarios.EXTRA_NOMAP));
             nuser.setPeso(data.getIntExtra(EditUsuarios.EXTRA_PESO,0));

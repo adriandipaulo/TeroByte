@@ -1,30 +1,28 @@
 package com.terobyte.appmedicamentos;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import com.google.android.material.appbar.MaterialToolbar;
-
-import androidx.core.app.NotificationManagerCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.terobyte.appmedicamentos.adapters.MedicamentoAdapter;
@@ -32,9 +30,6 @@ import com.terobyte.appmedicamentos.alarmManager.AlarmReceiver;
 import com.terobyte.appmedicamentos.entidades.Medicamentos;
 import com.terobyte.appmedicamentos.models.MedicamentosViewModel;
 
-import java.util.Calendar;
-
-import static android.app.PendingIntent.FLAG_CANCEL_CURRENT;
 import static android.app.PendingIntent.FLAG_UPDATE_CURRENT;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -66,6 +61,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             @Override
             public void onEditMedicamento(Medicamentos medicamento) {
+
                 Intent intent= new Intent(MainActivity.this,EditMedicamento.class);
                 intent.putExtra(EditMedicamento.EXTRA_ID,medicamento.getId_medicamento());
                 intent.putExtra(EditMedicamento.EXTRA_NOM,medicamento.getNombreMedicamento());
@@ -104,6 +100,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onActivityResult(requestCode, resultCode, data);
 
         if(requestCode== CODE_MEDICAMETO && resultCode == RESULT_OK){
+            findViewById(R.id.emptyLayout).setVisibility(View.GONE);
             Medicamentos xm= new Medicamentos();
             xm.setNombreMedicamento(data.getStringExtra(EditMedicamento.EXTRA_NOM));
             xm.setPresentacion(data.getStringExtra(EditMedicamento.EXTRA_DOS));
