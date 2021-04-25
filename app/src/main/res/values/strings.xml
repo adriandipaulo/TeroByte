@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">AppMedicamentos</string>
-    <string name="app_subtitle">Tero</string>
+    <string name="app_name">TeroByte</string>
+    <string name="app_subtitle">Medicamentos</string>
     <string name="home">Volver</string>
     <string name="med">Medicamentos</string>
     <string name="usu">Usuarios</string>
@@ -12,6 +12,6 @@
     <string name="ingrese_el_nombre">Ingrese el nombre</string>
     <string name="usuario">usuario</string>
     <string name="guardar">Guardar</string>
-    <string name="txtDes">Descripcion:</string>
+    <string name="txtDes">Descripción:</string>
     <string name="txtGen">Medicamento X</string>
 </resources>

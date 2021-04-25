@@ -28,7 +28,7 @@ import android.widget.Toast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.terobyte.appmedicamentos.adapters.MedicamentoAdapter;
-import com.terobyte.appmedicamentos.alarmManager.AlarmReceiver;
+import com.terobyte.appmedicamentos.AlarmManager.AlarmReciver;
 import com.terobyte.appmedicamentos.entidades.Medicamentos;
 import com.terobyte.appmedicamentos.models.MedicamentosViewModel;
 
