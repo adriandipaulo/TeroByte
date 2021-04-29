@@ -8,10 +8,8 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.terobyte.appmedicamentos.dao.IMedicamentosDao;
 import com.terobyte.appmedicamentos.dao.IUsuariosDao;
-import com.terobyte.appmedicamentos.dao.Mi_cel_dao;
 import com.terobyte.appmedicamentos.database.AppDataBase;
 import com.terobyte.appmedicamentos.entidades.Medicamentos;
-import com.terobyte.appmedicamentos.entidades.Mi_cel;
 import com.terobyte.appmedicamentos.entidades.Usuarios;
 
 import org.junit.After;
@@ -48,11 +46,12 @@ public class Mtest {
     public void creoCel() throws Exception{
         Mi_cel mi_cel = new Mi_cel();
         mi_cel.setId(1);
-        mi_cel.setHora_ini(217000001);
-        mi_cel.setHora_ini(217000009);
+        mi_cel.setHora_ini("2");
+        mi_cel.setHora_ap("4");
         mi_cel_dao.AgregarH(mi_cel);
         Mi_cel x=mi_cel_dao.BuscaCel(1);
-        assertTrue("Error No encontrado",mi_cel.getId()==x.getId());
+        Mi_cel j=mi_cel_dao.BuscaPorDatos("4","2");
+        assertTrue("Error No encontrado",mi_cel.getId()==j.getId());
 
         Usuarios usuarios= new Usuarios();
         usuarios.setAltura(1.78);

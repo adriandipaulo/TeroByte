@@ -16,6 +16,7 @@ public class MedicamentosViewHolder extends RecyclerView.ViewHolder{
     private final TextView usuario;
     private final TextView horaMinuto;
 
+
     private MedicamentosViewHolder(View ItemView){
         super(ItemView);
         nombreMedicamento = ItemView.findViewById(R.id.nombreMedicamento);
@@ -23,6 +24,7 @@ public class MedicamentosViewHolder extends RecyclerView.ViewHolder{
         dosis = ItemView.findViewById(R.id.dosisATomar);
         usuario = ItemView.findViewById(R.id.usuario);
         horaMinuto = ItemView.findViewById(R.id.horaMinuto);
+
     }
     public void Bind(String texto,String b,String c,Integer x,String hm){
         nombreMedicamento.setText(texto);
@@ -30,6 +32,7 @@ public class MedicamentosViewHolder extends RecyclerView.ViewHolder{
         usuario.setText(c);
         hora.setText(x.toString());
         horaMinuto.setText(hm);
+
 
         }
 

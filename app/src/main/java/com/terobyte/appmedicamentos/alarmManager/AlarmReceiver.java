@@ -23,6 +23,7 @@ public class AlarmReceiver extends BroadcastReceiver {
     public static String nombreMed;
     public static String usuarioMed;
     public static String presMed;
+    public static Integer medID;
 
 
     @Override
@@ -30,22 +31,23 @@ public class AlarmReceiver extends BroadcastReceiver {
         nombreMed=intent.getStringExtra(EXTRA_NOM);
         usuarioMed=intent.getStringExtra(EXTRA_USU);
         presMed=intent.getStringExtra(EXTRA_DOS);
+        medID=intent.getIntExtra(EXTRA_ID,0);
         showNotification(context);
 
     }
 
     public void showNotification(Context context) {
         Intent i = new Intent(context,MainActivity.class);
-        PendingIntent pi = PendingIntent.getActivity(context, 0, i, 0);
+        PendingIntent pi = PendingIntent.getActivity(context, medID, i, 0);
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context,"Canal001")
                 .setSmallIcon(R.drawable.ic_baseline_medical_services_24)
                 .setColor(Color.RED)
-                .setContentTitle(usuarioMed)
+                .setContentTitle(medID +"-"+ usuarioMed)
                 .setContentText("Tomar: " + presMed + " de: " + nombreMed);
         mBuilder.setContentIntent(pi);
         mBuilder.setDefaults(Notification.DEFAULT_SOUND);
         mBuilder.setAutoCancel(true);
         NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        mNotificationManager.notify(0, mBuilder.build());
+        mNotificationManager.notify(medID, mBuilder.build());
     }}
 
