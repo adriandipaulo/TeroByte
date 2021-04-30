@@ -33,7 +33,9 @@ public class EditUsuarios extends AppCompatActivity {
         final Button button = findViewById(R.id.buttonGuardaUsuario);
         button.setOnClickListener(view ->{
             Intent replyIntent= new Intent();
-            if (TextUtils.isEmpty(editNomAp.getText())){
+            if (TextUtils.isEmpty(editNomAp.getText()) ||
+                    TextUtils.isEmpty(editPeso.getText()) || TextUtils.isEmpty(editAltura.getText()) ||
+                    TextUtils.isEmpty(editPresion.getText())){
                 setResult(RESULT_CANCELED,replyIntent);
             } else{
                 String nomap= editNomAp.getText().toString();

@@ -41,7 +41,8 @@ public class EditMedicamento extends AppCompatActivity {
         final Button button = findViewById(R.id.BtnGuardar);
         button.setOnClickListener(view -> {
             Intent replyIntent = new Intent();
-            if (TextUtils.isEmpty(editNombre.getText())) {
+            if (TextUtils.isEmpty(editNombre.getText()) || TextUtils.isEmpty(editHora.getText()) ||
+                    TextUtils.isEmpty(editDosis.getText()) || TextUtils.isEmpty(editUsuario.getText())) {
                 setResult(RESULT_CANCELED, replyIntent);
             } else {
                 String enm = editNombre.getText().toString();
