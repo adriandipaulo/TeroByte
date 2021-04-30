@@ -14,4 +14,13 @@
     <string name="guardar">Guardar</string>
     <string name="txtDes">Descripcion:</string>
     <string name="txtGen">Medicamento X</string>
+    <string name="horas">Horas</string>
+    <string name="tomar_cada">Tomar Cada</string>
+    <string name="tomar_a_las">Tomar a Las</string>
+    <string name="cantidad_a_tomar">Cantidad a Tomar</string>
+    <string name="tomar">Tomar</string>
+    <string name="nombre">Nombre:</string>
+    <string name="altura">Altura:</string>
+    <string name="peso">Peso:</string>
+    <string name="presion">Presion:</string>
 </resources>

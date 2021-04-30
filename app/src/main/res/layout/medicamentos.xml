@@ -42,7 +42,7 @@
                 android:id="@+id/horaMinuto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Horas"
+                android:text="@string/horas"
                 android:textSize="18sp"
                 app:layout_constraintBaseline_toBaselineOf="@+id/tomarCada"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -73,7 +73,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="54dp"
                 android:layout_marginLeft="54dp"
-                android:text="Tomar Cada"
+                android:text="@string/tomar_cada"
                 app:layout_constraintBaseline_toBaselineOf="@+id/tomarCada"
                 app:layout_constraintStart_toStartOf="parent" />
 
@@ -86,7 +86,7 @@
                 android:layout_marginTop="8dp"
                 android:background="#ffffff"
                 android:fontFamily="serif"
-                android:text="Tomar a Las"
+                android:text="@string/tomar_a_las"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toTopOf="@+id/dosisATomar"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -103,7 +103,7 @@
                 android:layout_marginTop="8dp"
                 android:background="#ffffff"
                 android:fontFamily="serif"
-                android:text="Cantidad a Tomar"
+                android:text="@string/cantidad_a_tomar"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toTopOf="@+id/usuario"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -119,7 +119,7 @@
                 android:layout_marginBottom="8dp"
                 android:background="#ffffff"
                 android:fontFamily="serif"
-                android:text="Usuaro"
+                android:text="@string/usuario"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -161,7 +161,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="90dp"
                 android:layout_marginLeft="90dp"
-                android:text="Tomar"
+                android:text="@string/tomar"
                 app:layout_constraintBaseline_toBaselineOf="@+id/dosisATomar"
                 app:layout_constraintStart_toStartOf="parent" />
 
@@ -171,7 +171,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="80dp"
                 android:layout_marginLeft="80dp"
-                android:text="Usuario"
+                android:text="@string/usuario"
                 app:layout_constraintBaseline_toBaselineOf="@+id/usuario"
                 app:layout_constraintStart_toStartOf="parent" />
 
